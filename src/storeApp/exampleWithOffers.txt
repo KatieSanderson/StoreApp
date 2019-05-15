@@ -1,0 +1,5 @@
+Product Code	Description	Price	Offer
+H57	Tin o Beans	1.23	Half Price
+C330	Fruity drink	0.54	3 for 1.00
+BR7	Sliced loaf	1.54	BOGOF
+G84	Crisps	1	

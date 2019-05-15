@@ -1,0 +1,4 @@
+Product Code	Description	Price
+H57	Tin o Beans	1.23
+C330	Fruity drink	0.54
+BR7	Sliced loaf	1.54
