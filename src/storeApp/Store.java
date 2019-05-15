@@ -41,7 +41,11 @@ class Store {
     }
 
     void addSku(Sku sku) {
-        skus.put(sku.getProductCode(), sku);
+        if (skus.containsKey(sku.getProductCode())) {
+            throw new IllegalStateException("Attempted duplicate product code parse: [" + sku.getProductCode() + "]");
+        } else {
+            skus.put(sku.getProductCode(), sku);
+        }
     }
 
     Map<String, Sku> getSkus() {

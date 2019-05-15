@@ -45,7 +45,17 @@ public class Application implements AutoCloseable {
         String line;
         while ((line = bufferedReader.readLine()) != null) {
             Sku nextSku = Sku.parseSku(line);
-            store.addSku(nextSku);
+            try {
+                store.addSku(nextSku);
+            } catch (IllegalStateException e) {
+                System.out.println("Error: cannot add product code [" + nextSku.getProductCode() + "] due to duplicate entry. Options:");
+                for (DuplicateSkuResponse option : DuplicateSkuResponse.values()) {
+                    System.out.println(option.code + " - " + option.output);
+                }
+                System.out.print("Please input how to proceed: ");
+                scanner.nextLine();
+            }
+
         }
     }
 

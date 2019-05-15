@@ -7,6 +7,8 @@ import org.junit.Test;
 import java.math.BigDecimal;
 import java.util.Optional;
 
+import static org.junit.Assert.fail;
+
 public class StoreTest {
 
     private static final String PC1 = "H57";
@@ -33,10 +35,15 @@ public class StoreTest {
     }
 
     @Test
-    public void addSkuTestSuccessful() {
+    public void addSkuTest_Successful() {
         Assert.assertTrue(store.getSkus().isEmpty());
         store.addSku(SKU1);
         Assert.assertTrue(store.getSkus().containsValue(SKU1));
+    }
+
+    @Test
+    public void addSkuTest_DuplicateAdded() {
+        fail();
     }
 
 }
