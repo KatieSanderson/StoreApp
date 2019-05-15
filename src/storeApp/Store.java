@@ -1,7 +1,8 @@
 package storeApp;
 
-import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 /**
@@ -22,29 +23,28 @@ class Store {
      *  - check for and prevent duplicated productCode Sku
      *  - allow constant-time lookup (for example, {@link #getSkuFromProductCode(String)})
      */
-    private final List<Sku> skus;
+    private final Map<String, Sku> skus;
     private final Till till;
 
     Store() {
-        skus = new ArrayList<>();
+        skus = new HashMap<>();
         till = new Till(this);
     }
 
     Optional<Sku> getSkuFromProductCode(String productCode) {
-        for (Sku sku : skus) {
-            if (sku.getProductCode().equals(productCode)) {
-                return Optional.of(sku);
-            }
+        if (skus.containsKey(productCode)) {
+            return Optional.of(skus.get(productCode));
+        } else {
+            System.out.println("No SKU in store for product code [" + productCode + "]");
+            return Optional.empty();
         }
-        System.out.println("No SKU in store for product code [" + productCode + "]");
-        return Optional.empty();
     }
 
     void addSku(Sku sku) {
-        skus.add(sku);
+        skus.put(sku.getProductCode(), sku);
     }
 
-    List<Sku> getSkus() {
+    Map<String, Sku> getSkus() {
         return skus;
     }
 

@@ -16,7 +16,7 @@ public class Application implements AutoCloseable {
     private final BufferedReader bufferedReader;
     private final Store store;
 
-    Application(BufferedReader bufferedReader) throws FileNotFoundException {
+    Application(BufferedReader bufferedReader) {
         scanner = new Scanner(System.in);
         this.bufferedReader = bufferedReader;
         store = new Store();

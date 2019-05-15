@@ -8,12 +8,12 @@ import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
 import java.io.BufferedReader;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 
 import static org.mockito.Mockito.when;
 
@@ -33,7 +33,7 @@ public class ApplicationTest {
     private BufferedReader bufferedReader;
 
     @Before
-    public void setup() throws FileNotFoundException {
+    public void setup() {
         application = new Application(bufferedReader);
     }
 
@@ -42,9 +42,9 @@ public class ApplicationTest {
         when(bufferedReader.readLine())
                 .thenReturn("Headers").thenReturn(PRODUCT1).thenReturn(PRODUCT2).thenReturn(PRODUCT3).thenReturn(null);
         application.parseReader();
-        List<Sku> skus = application.getStore().getSkus();
-        for (int i = 0; i < skus.size(); i++) {
-            Assert.assertEquals(SKUS.get(i), skus.get(i));
+        Map<String, Sku> skus = application.getStore().getSkus();
+        for (Map.Entry<String,Sku> mapEntry : skus.entrySet()) {
+            Assert.assertTrue(SKUS.contains(mapEntry.getValue()));
         }
     }
 

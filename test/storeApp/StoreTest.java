@@ -36,7 +36,7 @@ public class StoreTest {
     public void addSkuTestSuccessful() {
         Assert.assertTrue(store.getSkus().isEmpty());
         store.addSku(SKU1);
-        Assert.assertTrue(store.getSkus().contains(SKU1));
+        Assert.assertTrue(store.getSkus().containsValue(SKU1));
     }
 
 }
