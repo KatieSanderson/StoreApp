@@ -1,7 +1,7 @@
 package storeApp;
 
 public enum DuplicateSkuResponse {
-    OVERWRITE(1, "Overwrite existing product info") {
+    OVERWRITE(1, "Keep invading product info") {
         @Override
         public void executeResponse(Sku existingSku, Sku invadingSku, Store store) {
             store.getSkus().put(invadingSku.getProductCode(), invadingSku);

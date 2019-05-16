@@ -48,17 +48,21 @@ public class Application implements AutoCloseable {
             try {
                 store.addSku(nextSku);
             } catch (DuplicateSkuException e) {
-                parseDuplicateSkuException(nextSku, e);
+                parseDuplicateSkuException(e);
             }
 
         }
     }
 
-    private void parseDuplicateSkuException(Sku nextSku, DuplicateSkuException e) {
-        System.out.println("Error: cannot add product code [" + nextSku.getProductCode() + "] due to duplicate entry. Options:");
+    private void parseDuplicateSkuException(DuplicateSkuException e) {
+        Sku existingSku = e.getExistingSku();
+        Sku invadingSku = e.getInvadingSku();
+        System.out.println("Error: cannot add product code [" + invadingSku.getProductCode() + "] due to duplicate entry. Options:");
         for (DuplicateSkuResponse option : DuplicateSkuResponse.values()) {
             System.out.println(option.code + " - " + option.output);
         }
+        System.out.println("Invading SKU... Product Code: " + invadingSku.getProductCode() + " Description: " + invadingSku.getDescription() + " Price: " + invadingSku.getPrice());
+        System.out.println("Existing SKU... Product Code: " + existingSku.getProductCode() + " Description: " + existingSku.getDescription() + " Price: " + existingSku.getPrice());
         System.out.print("Please input how to proceed: ");
         int userResponse = Integer.parseInt(scanner.nextLine());
         for (DuplicateSkuResponse option : DuplicateSkuResponse.values()) {
