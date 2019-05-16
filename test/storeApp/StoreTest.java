@@ -23,7 +23,7 @@ public class StoreTest {
     }
 
     @Test
-    public void getSkuFromProductCodeTest_Successful() {
+    public void getSkuFromProductCodeTest_Successful() throws DuplicateSkuException {
         store.addSku(SKU1);
         store.addSku(SKU2);
         Assert.assertEquals(Optional.of(SKU1), store.getSkuFromProductCode(PC1));
@@ -35,7 +35,7 @@ public class StoreTest {
     }
 
     @Test
-    public void addSkuTest_Successful() {
+    public void addSkuTest_Successful() throws DuplicateSkuException {
         Assert.assertTrue(store.getSkus().isEmpty());
         store.addSku(SKU1);
         Assert.assertTrue(store.getSkus().containsValue(SKU1));

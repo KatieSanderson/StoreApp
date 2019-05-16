@@ -40,9 +40,9 @@ class Store {
         }
     }
 
-    void addSku(Sku sku) {
+    void addSku(Sku sku) throws DuplicateSkuException {
         if (skus.containsKey(sku.getProductCode())) {
-            throw new IllegalStateException("Attempted duplicate product code parse: [" + sku.getProductCode() + "]");
+            throw new DuplicateSkuException(skus.get(sku.getProductCode()), sku, "Attempted duplicate product code parse. Existing: [" + skus.get(sku.getProductCode()) + "] Invading: ");
         } else {
             skus.put(sku.getProductCode(), sku);
         }
