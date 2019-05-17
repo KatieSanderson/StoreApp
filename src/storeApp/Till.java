@@ -1,15 +1,12 @@
 package storeApp;
 
 import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * {@link Till} is constructed with empty lists. {
  *
- * @link Till #scan} adds a {@link Sku} to the scannedItems, if a corresponding {@link Sku} is found via @{@link Store #getSkuFromProductCode}.
+ * @link Till #scan} adds a {@link Sku} to the scannedItems, if the input contains a non-empty {@link Sku}}.
  *
  * {@link Till #getReceipt} determines offers and savings after all {@link String} are parsed into {@link Sku}.
  * If applicable, a {@link Sku} with an {@link Offer} is added to offers {@link Map}.
@@ -22,19 +19,17 @@ public class Till {
     private final List<Sku> scannedItems;
     private final List<Saving> savings;
     private final Map<Sku, Integer> offers;
-    private final Store store;
     private BigDecimal totalSavings;
 
-    Till(Store store) {
+    Till() {
         scannedItems = new ArrayList<>();
         savings = new ArrayList<>();
         offers = new HashMap<>();
-        this.store = store;
         totalSavings = new BigDecimal(0);
     }
 
-    void scan(String productCode) {
-        store.getSkuFromProductCode(productCode).ifPresent(scannedItems::add);
+    void scan(Optional<Sku> sku) {
+        sku.ifPresent(scannedItems::add);
     }
 
     /**

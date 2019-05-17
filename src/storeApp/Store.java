@@ -28,7 +28,7 @@ class Store {
 
     Store() {
         skus = new HashMap<>();
-        till = new Till(this);
+        till = new Till();
     }
 
     Optional<Sku> getSkuFromProductCode(String productCode) {

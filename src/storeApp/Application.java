@@ -31,11 +31,11 @@ public class Application implements AutoCloseable {
     }
 
     private void scanItems() {
-        System.out.println("Please input product codes to be scanned:");
         String exitString = "*";
+        System.out.println("Please input product codes to be scanned (\"" + exitString + "\" to end transaction):");
         String line;
         while (!(line = scanner.nextLine()).equals(exitString)) {
-            store.getTill().scan(line);
+            store.getTill().scan(store.getSkuFromProductCode(line));
         }
     }
 
